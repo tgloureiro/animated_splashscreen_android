@@ -4,8 +4,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/blue"
-        tools:context=".MainActivity">
+        android:background="@color/blue"
+        tools:context=".MainActivity"
+        tools:ignore="Overdraw"
+        >
 
     <LinearLayout
             android:id="@+id/content"
