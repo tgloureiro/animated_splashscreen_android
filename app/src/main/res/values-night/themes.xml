@@ -1,11 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.AnimatedSplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/blue</item>
-        <!-- Customize your theme here. -->
+        <!-- Window background as drawable -->
+        <item name="android:background">@drawable/splash_screen_transition</item>
     </style>
 </resources>
