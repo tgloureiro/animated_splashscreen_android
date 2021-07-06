@@ -4,7 +4,10 @@
         <item name="colorPrimary">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/blue</item>
-        <!-- Window background as drawable -->
-        <item name="android:background">@drawable/splash_screen_transition</item>
+    </style>
+    <style name="Theme.AppSplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/blue</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_content</item>
+        <item name="postSplashScreenTheme">@style/Theme.AnimatedSplashScreen</item>
     </style>
 </resources>

@@ -1,26 +1,27 @@
 package com.example.animatedsplashscreen
 
-import android.graphics.drawable.TransitionDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.splashscreen.SplashScreenViewProvider
 
 class MainActivity : AppCompatActivity() {
-
     companion object{
         const val splashFadeDurationMillis = 500
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val transitionDrawable = window.decorView.background as TransitionDrawable
-        transitionDrawable.startTransition(splashFadeDurationMillis)
         super.onCreate(savedInstanceState)
-        lifecycleScope.launch {
-            delay(splashFadeDurationMillis.toLong())
-            setContentView(R.layout.activity_main)
+        val splashScreen = installSplashScreen()
+        splashScreen.setOnExitAnimationListener { splashScreenViewProvider ->
+            splashScreenViewProvider.iconView
+                .animate()
+                .setDuration(splashFadeDurationMillis.toLong())
+                .alpha(0f)
+                .withEndAction {
+                    splashScreenViewProvider.remove()
+                    setContentView(R.layout.activity_main)
+                }.start()
         }
     }
 }
