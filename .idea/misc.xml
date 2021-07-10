@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/splash_screen_transition.xml" value="0.2722222222222222" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27807971014492755" />
+        <entry key="app/src/main/res/xml/start_screen_scene.xml" value="0.18958333333333333" />
       </map>
     </option>
   </component>
