@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.*
+import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -20,40 +21,49 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
+@ExperimentalAnimationApi
 class MainActivity : AppCompatActivity() {
     companion object{
-        const val splashFadeDurationMillis = 500
+        const val splashFadeDurationMillis = 300
     }
 
-    @ExperimentalAnimationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val splashScreen = installSplashScreen()
-        splashScreen.setOnExitAnimationListener { splashScreenViewProvider ->
-            splashScreenViewProvider.iconView
-                .animate()
-                .setDuration(splashFadeDurationMillis.toLong())
-                .alpha(0f)
-                .withEndAction {
-                    splashScreenViewProvider.remove()
-                    setContent{
-                       StartScreen()
-                    }
-                }.start()
+        val splashWasDisplayed = savedInstanceState != null
+        if(!splashWasDisplayed){
+            val splashScreen = installSplashScreen()
+
+
+            splashScreen.setOnExitAnimationListener { splashScreenViewProvider ->
+                // Get icon instance and start a fade out animation
+                splashScreenViewProvider.iconView
+                    .animate()
+                    .setDuration(splashFadeDurationMillis.toLong())
+                    .alpha(0f)
+                    .withEndAction {
+                        // After the fade out, remove the splash and set content view
+                        splashScreenViewProvider.remove()
+                        setContent{
+                            StartScreen()
+                        }
+                    }.start()
+            }
+        }else{
+            setTheme(R.style.Theme_AnimatedSplashScreen)
+            setContent{
+                StartScreen()
+            }
         }
+
     }
 }
 
 
-
-
 @ExperimentalAnimationApi
-@Preview
 @Composable
 fun StartScreen() {
     var visible by remember { mutableStateOf(false) }
@@ -74,8 +84,9 @@ fun StartScreen() {
                         },
                         animationSpec = tween(
                                 durationMillis = MainActivity.splashFadeDurationMillis,
-                        easing = LinearEasing
-                    )
+                        easing = CubicBezierEasing(0f, 0f, 0f, 1f)
+
+                        )
                     ),
                 ) {
                     Column(
