@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             )
             // 2 = As we can't register a listener to be notified when the
             // transition drawable finishes, launches a coroutine that blocks for
-            // the animation duration, flips the flag and sets the content view after finishing
+            // the animation duration and sets the content view after finishing
             lifecycleScope.launch {
                 // Time between the cross fade and start screen animation
                 delay(logoCrossFadeDurationMillis.toLong() + spacingAfterFadeDurationMillis)
