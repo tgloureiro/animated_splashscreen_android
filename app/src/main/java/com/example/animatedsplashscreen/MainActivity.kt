@@ -6,7 +6,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : AppCompatActivity() {
     companion object{
-        const val splashFadeDurationMillis = 500
+        const val splashFadeDurationMillis = 300
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
